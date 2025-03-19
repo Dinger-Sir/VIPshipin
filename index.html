@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频在线解析</title>
+  <!-- 第二部分插入CSS样式 -->
+</head>
+<body>
+  <div class="container">
+    <h1>视频在线解析</h1>
+
+    <!-- 输入区域 -->
+    <div class="input-group">
+      <select id="jk">
+        <option value="https://jx.xmflv.com/?url=">接口1</option>
+        <option value="https://video.isyour.love/player/getplayer?url=">接口2</option>
+        <option value="http://156.238.242.197/?url=">接口3</option>
+      </select>
+      
+      <input 
+        type="url" 
+        id="url"
+        placeholder="请输入视频地址"
+        autocomplete="off"
+      >
+      
+      <button onclick="parseVideo()">立即解析</button>
+    </div>
+
+    <!-- 使用说明 -->
+    <div class="instructions">
+      <h3>使用说明：</h3>
+      <p>1. 复制完整电影视频链接地址</p>
+      <p>2. 把链接粘贴到上方输入框</p>
+      <p>3. 点击立即解析按钮播放视频</p>
+    </div>
+
+    <!-- 视频解析框 -->
+    <div class="result-frame">
+      <div class="video-container">
+        <div class="parse-status" id="statusText">输入链接后，等待解析...</div>
+        <iframe 
+          id="player"
+          allowfullscreen
+          frameborder="0"
+          sandbox="allow-scripts allow-same-origin"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- 导航链接 -->
+    <div class="nav-links">
+      <a href="/http://www.zzjt168.com/">外部视频网站</a>
+      <a href="/https://a1q3lqczk3.feishu.cn/docx/NeLxd6hTloyUsfxESgYcz9Kgnwg">新视野大学英语答案</a>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <p>由「大学一点通」团队提供技术支持</p>
+  </div>
+
+  <!-- 第三部分插入JavaScript -->
+</body>
+</html>
+<style>
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: "Microsoft Yahei", sans-serif;
+  }
+  
+  body {
+    background: #f8f9fa;
+    color: #333;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin: 20px 0;
+    font-size: 24px;
+  }
+
+  .input-group {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  select, input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #2980b9;
+  }
+
+  /* 视频容器 */
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9比例 */
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  #player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* 解析状态 */
+  .parse-status {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 18px;
+    background: rgba(0,0,0,0.7);
+    padding: 12px 24px;
+    border-radius: 24px;
+    z-index: 10;
+  }
+
+  /* 使用说明 */
+  .instructions {
+    margin: 20px 0;
+    color: #888;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    line-height: 1.8;
+  }
+
+  /* 导航链接 */
+  .nav-links {
+    text-align: center;
+    margin: 25px 0 15px;
+  }
+  .nav-links a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+  }
+  .nav-links a:hover {
+    background: #f0f0f0;
+    color: #3498db;
+  }
+
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 30px 0;
+    color: #666;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+  }
+</style>
+<script>
+  // 视频解析功能
+  function parseVideo() {
+    const videoUrl = document.getElementById('url').value;
+    const api = document.getElementById('jk').value;
+    const statusText = document.getElementById('statusText');
+
+    if(videoUrl && api) {
+      statusText.textContent = "正在解析中...";
+      document.getElementById('player').src = api + encodeURIComponent(videoUrl);
+    } else {
+      statusText.textContent = "请输入有效视频地址";
+      setTimeout(() => {
+        statusText.textContent = "等待解析...";
+      }, 2000);
+    }
+  }
+
+  // 视频加载完成监听
+  document.getElementById('player').onload = function() {
+    document.getElementById('statusText').style.display = 'none';
+    
+    // 强制视频自适应
+    const iframe = document.getElementById('player');
+    iframe.contentWindow.postMessage({
+      event: 'command',
+      func: 'setSize',
+      args: [iframe.offsetWidth, iframe.offsetHeight]
+    }, '*');
+  };
+
+  // 窗口尺寸变化适配
+  window.addEventListener('resize', () => {
+    const iframe = document.getElementById('player');
+    if(iframe.contentWindow) {
+      iframe.contentWindow.postMessage({
+        event: 'command',
+        func: 'setSize',
+        args: [iframe.offsetWidth, iframe.offsetHeight]
+      }, '*');
+    }
+  });
+</script>
