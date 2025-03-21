@@ -2,14 +2,13 @@
 <html lang="zh-cn">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>大学一点通-VIP视频在线观看</title>
-  <!-- 第二部分插入CSS样式 -->
 </head>
 <body>
   <div class="container">
     <h1>VIP视频在线观看</h1>
-<div class="author">！！视频由第三方提供，视频中的棋牌、赌博、诱惑性广告是开设在境外的非法诈骗网站，切勿相信！！</div>
+    <div class="author">！！视频由第三方提供，视频中的棋牌、赌博、诱惑性广告是开设在境外的非法诈骗网站，切勿相信！！</div>
 
     <!-- 输入区域 -->
     <div class="input-group">
@@ -57,14 +56,9 @@
     </div>
   </div>
 
-  <!-- 页脚 -->
   <div class="footer">
     <p>由「大学一点通」团队提供技术支持</p>
   </div>
-
-  <!-- 第三部分插入JavaScript -->
-</body>
-</html>
 <style>
   * { 
     margin: 0; 
@@ -82,19 +76,50 @@
   .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
   }
 
   h1 {
     text-align: center;
     color: #2c3e50;
-    margin: 20px 0;
-    font-size: 24px;
+    margin: 15px 0;
+    font-size: 22px;
+  }
+
+  .author {
+    color: #ff0000 !important;
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+    background: #fff3f3;
+    border-radius: 4px;
+  }
+
+  /* 移动端优化 */
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    .input-group {
+      margin: 15px 0;
+    }
+    select, input {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    button {
+      padding: 12px 15px;
+    }
   }
 
   .input-group {
     display: grid;
-    gap: 10px;
+    gap: 8px;
     margin: 20px 0;
   }
 
@@ -120,14 +145,14 @@
     background: #2980b9;
   }
 
-  /* 视频容器 */
   .video-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9比例 */
+    padding-top: 56.25%;
     background: #000;
     border-radius: 8px;
     overflow: hidden;
+    margin: 15px 0;
   }
 
   #player {
@@ -139,60 +164,59 @@
     border: none;
   }
 
-  /* 解析状态 */
   .parse-status {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     background: rgba(0,0,0,0.7);
     padding: 12px 24px;
     border-radius: 24px;
     z-index: 10;
   }
 
-  /* 使用说明 */
   .instructions {
-    margin: 20px 0;
-    color: #888;
-    padding: 15px;
+    margin: 15px 0;
+    color: #666;
+    padding: 12px;
     background: #f8f9fa;
-    border-radius: 8px;
-    line-height: 1.8;
+    border-radius: 6px;
+    line-height: 1.6;
+    font-size: 14px;
   }
 
-  /* 导航链接 */
   .nav-links {
     text-align: center;
-    margin: 25px 0 15px;
+    margin: 20px 0;
   }
   .nav-links a {
+    display: inline-block;
     color: #666;
     text-decoration: none;
-    margin: 0 15px;
+    margin: 8px;
     padding: 8px 20px;
     border-radius: 20px;
     border: 1px solid #ddd;
     transition: all 0.3s;
+    font-size: 14px;
   }
   .nav-links a:hover {
     background: #f0f0f0;
     color: #3498db;
   }
 
-  /* 页脚 */
   .footer {
     text-align: center;
-    padding: 30px 0;
+    padding: 20px 0;
     color: #666;
     border-top: 1px solid #eee;
-    margin-top: 40px;
+    margin-top: 30px;
+    font-size: 13px;
   }
 </style>
 <script>
-  // 视频解析功能
   function parseVideo() {
     const videoUrl = document.getElementById('url').value;
     const api = document.getElementById('jk').value;
@@ -209,11 +233,8 @@
     }
   }
 
-  // 视频加载完成监听
   document.getElementById('player').onload = function() {
     document.getElementById('statusText').style.display = 'none';
-    
-    // 强制视频自适应
     const iframe = document.getElementById('player');
     iframe.contentWindow.postMessage({
       event: 'command',
@@ -222,7 +243,6 @@
     }, '*');
   };
 
-  // 窗口尺寸变化适配
   window.addEventListener('resize', () => {
     const iframe = document.getElementById('player');
     if(iframe.contentWindow) {
@@ -234,3 +254,5 @@
     }
   });
 </script>
+</body>
+</html>
