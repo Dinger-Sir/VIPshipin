@@ -10,6 +10,9 @@
     <h1>VIP视频在线观看</h1>
     <div class="author">！！视频由第三方提供，视频中的棋牌、赌博、诱惑性广告是开设在境外的非法诈骗网站，切勿相信！！</div>
 
+<!-- 网状动态背景 -->
+<canvas id="netBackground"></canvas>
+
     <!-- 输入区域 -->
     <div class="input-group">
       <select id="jk">
@@ -66,22 +69,28 @@
     box-sizing: border-box;
     font-family: "Microsoft Yahei", sans-serif;
   }
-  
-  body {
-    background: #f8f9fa;
-    color: #333;
-    min-height: 100vh;
-  }
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 15px;
-  }
+body {
+  background: transparent !important;  /* 新增：强制透明背景 */
+  color: #333;
+  min-height: 100vh;
+  margin: 0;                          /* 确保无外边距 */
+  padding: 0;                         /* 确保无内边距 */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 15px;
+  position: relative;  /* 新增：启用层级定位 */
+  z-index: 2;          /* 新增：确保高于canvas的z-index(-1) */
+  background: transparent !important; /* 强制透明背景 */
+  box-shadow: none;    /* 移除阴影 */
+}
 
   h1 {
     text-align: center;
-    color: #2c3e50;
+    color: #fafafa;
     margin: 15px 0;
     font-size: 22px;
   }
@@ -207,14 +216,18 @@
     color: #3498db;
   }
 
-  .footer {
+ /* ===== 页脚样式 ===== */
+  
+.footer {
     text-align: center;
     padding: 20px 0;
-    color: #666;
-    border-top: 1px solid #eee;
-    margin-top: 30px;
+    color: #fff !important;      /* 黑色文字 */
     font-size: 13px;
+    position: relative;
+    z-index: 9999;              /* 最高层级 */
+    margin: 0;
   }
+
 </style>
 <script>
   function parseVideo() {
@@ -232,6 +245,89 @@
       }, 2000);
     }
   }
+
+// 网状动态背景
+const canvas = document.getElementById('netBackground');
+const ctx = canvas.getContext('2d');
+
+// 设置画布尺寸
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// 节点类
+class Node {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.vx = Math.random() * 2 - 1;
+    this.vy = Math.random() * 2 - 1;
+    this.radius = 2;
+  }
+
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // 边界反弹
+    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#3498db';
+    ctx.fill();
+  }
+}
+
+// 创建节点
+const nodes = [];
+for (let i = 0; i < 300; i++) {
+  nodes.push(new Node(
+    Math.random() * canvas.width,
+    Math.random() * canvas.height
+  ));
+}
+
+// 绘制连线
+function drawLines() {
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 150) {
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(52, 152, 219, ${1 - dist / 150})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+// 动画循环
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  nodes.forEach(node => {
+    node.update();
+    node.draw();
+  });
+
+  drawLines();
+  requestAnimationFrame(animate);
+}
+
+animate();
 
   document.getElementById('player').onload = function() {
     document.getElementById('statusText').style.display = 'none';
@@ -302,6 +398,27 @@
       gap: 15px;
     }
 
+/* 背景特效容器 */
+canvas#netBackground {
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -1;
+    background: radial-gradient(circle, #0a0a1a, #778899);
+
+/* 确保内容在背景之上 */
+.container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+  border-radius: 12px;
+  box-shadow: none !important; /* 强制禁用阴影 */
+  padding: 20px;
+  margin: 20px auto;
+}
+
     .right-banner img {
       width: 100%;
       border-radius: 8px;
@@ -325,7 +442,7 @@
 <body>
   <!-- 在container闭合标签前添加 -->
   <div class="right-banner">
-    <img src="lindaiyu.jpg" alt="林黛玉" id="rightAd1">
+    <img src="placeholder-1.jpg" alt="右侧广告1" id="rightAd1">
   </div>
 
   <!-- 原有container内容保持不变 -->
