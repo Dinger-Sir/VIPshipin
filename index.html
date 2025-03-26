@@ -280,7 +280,7 @@ class Node {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = '#3498db';
+    ctx.fillStyle = '#9AD7F4';
     ctx.fill();
   }
 }
@@ -306,7 +306,7 @@ function drawLines() {
         ctx.beginPath();
         ctx.moveTo(nodes[i].x, nodes[i].y);
         ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.strokeStyle = `rgba(52, 152, 219, ${1 - dist / 150})`;
+        ctx.strokeStyle = `rgba(154, 215, 244, ${1 - dist / 150})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -406,7 +406,7 @@ canvas#netBackground {
     width: 100vw !important;
     height: 100vh !important;
     z-index: -1;
-    background: radial-gradient(circle, #0a0a1a, #778899);
+    background: radial-gradient(circle,  #0a0a1a, #293047);
 
 /* 确保内容在背景之上 */
 .container {
@@ -442,7 +442,7 @@ canvas#netBackground {
 <body>
   <!-- 在container闭合标签前添加 -->
   <div class="right-banner">
-    <img src="lindaiyu.jpg" alt="欢迎" id="rightAd1">
+    <img src="lindaiyu.jpg" alt="林黛玉" id="rightAd1">
   </div>
 
   <!-- 原有container内容保持不变 -->
