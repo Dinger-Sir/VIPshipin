@@ -1,469 +1,64 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>大学一点通-VIP视频在线观看</title>
-</head>
-<body>
-  <div class="container">
+<!DOCTYPE html><html lang="zh-cn"> 
+    <head> <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+        <title>大学一点通-VIP视频在线观看</title> 
+        <link rel="stylesheet" href="./style/styles.css"> 
+    </head> 
+    <body> 
+        <canvas id="netBackground"></canvas>
+<div class="container">
     <h1>VIP视频在线观看</h1>
     <div class="author">！！视频由第三方提供，视频中的棋牌、赌博、诱惑性广告是开设在境外的非法诈骗网站，切勿相信！！</div>
 
-<!-- 网状动态背景 -->
-<canvas id="netBackground"></canvas>
-
-    <!-- 输入区域 -->
     <div class="input-group">
-      <select id="jk">
-        <option value="https://jx.xmflv.com/?url=">来源1</option>
-        <option value="https://video.isyour.love/player/getplayer?url=">来源2</option>
-<option value="https://jx.playerjy.com/?url=">来源3</option>
-<option value="https://www.8090g.cn/?url=">来源4</option>
-<option value="https://www.pouyun.com/?url=">来源5</option>
-<option value="https://jx.xmflv.com/?url=">来源6</option>
-<option value="https://www.yemu.xyz/?url=">来源7</option>
-<option value="https://jx.m3u8.tv/jiexi/?url=">来源8</option>
-<option value="https://api.qianqi.net/vip/?url=">来源9</option>
-<option value="https://www.playm3u8.cn/jiexi.php?url=">来源10</option>
-<option value="https://jx.xmflv.cc/?url=">来源11</option>
-<option value="https://im1907.top/?jx=">来源12</option>
-<option value="https://jx.yparse.com/index.php?url=">来源13</option>
-      
-</select>
-      
-      <input 
-        type="url" 
-        id="url"
-        placeholder="请输入视频地址"
-        autocomplete="off"
-      >
-      
-      <button onclick="parseVideo()">立即观看</button>
+        <select id="jk">
+            <option value="https://jx.xmflv.com/?url=">来源1</option>
+            <option value="https://video.isyour.love/player/getplayer?url=">来源2</option>
+    <option value="https://jx.playerjy.com/?url=">来源3</option>
+    <option value="https://www.8090g.cn/?url=">来源4</option>
+    <option value="https://www.pouyun.com/?url=">来源5</option>
+    <option value="https://jx.xmflv.com/?url=">来源6</option>
+    <option value="https://www.yemu.xyz/?url=">来源7</option>
+    <option value="https://jx.m3u8.tv/jiexi/?url=">来源8</option>
+    <option value="https://api.qianqi.net/vip/?url=">来源9</option>
+    <option value="https://www.playm3u8.cn/jiexi.php?url=">来源10</option>
+    <option value="https://jx.xmflv.cc/?url=">来源11</option>
+    <option value="https://im1907.top/?jx=">来源12</option>
+    <option value="https://jx.yparse.com/index.php?url=">来源13</option>
+        </select>
+        <input type="url" id="url" placeholder="请输入视频地址" autocomplete="off">
+        <button onclick="parseVideo()">立即观看</button>
     </div>
 
-    <!-- 使用说明 -->
     <div class="instructions">
-      <h3>使用说明：</h3>
-      <p>1. 复制完整电影视频链接地址</p>
-      <p>2. 把链接粘贴到上方输入框</p>
-      <p>3. 点击立即观看按钮播放视频</p>
+        <h3>使用说明：</h3>
+        <p>1. 复制完整电影视频链接地址</p>
+        <p>2. 把链接粘贴到上方输入框</p>
+        <p>3. 点击立即观看按钮播放视频</p>
+        <br>
+        <p ><strong>【备注】电脑端和手机端均可兼容使用</strong></p>
     </div>
 
-    <!-- 视频解析框 -->
     <div class="result-frame">
-      <div class="video-container">
-        <div class="parse-status" id="statusText">输入链接后，等待解析...</div>
-        <iframe 
-          id="player"
-          allowfullscreen
-          frameborder="0"
-          sandbox="allow-scripts allow-same-origin"
-        ></iframe>
-      </div>
+        <div class="video-container">
+            <div class="parse-status" id="statusText">输入链接后，等待解析...</div>
+            <iframe id="player" allowfullscreen frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
     </div>
 
-    <!-- 导航链接 -->
     <div class="nav-links">
-      <a href="http://www.zzjt168.com/" target="_blank">外部视频网站</a>
-      <a href="https://a1q3lqczk3.feishu.cn/docx/NeLxd6hTloyUsfxESgYcz9Kgnwg" target="_blank">新视野大学英语答案</a>
+        <a href="http://www.zzjt168.com/" target="_blank">外部视频网站</a>
+        <a href="https://a1q3lqczk3.feishu.cn/docx/NeLxd6hTloyUsfxESgYcz9Kgnwg" target="_blank">新视野大学英语答案</a>
     </div>
-  </div>
+</div>
 
-  <div class="footer">
-    <p>由「大学一点通」团队提供技术支持</p>
-  </div>
-<style>
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box;
-    font-family: "Microsoft Yahei", sans-serif;
-  }
-
-body {
-  background: transparent !important;  /* 新增：强制透明背景 */
-  color: #333;
-  min-height: 100vh;
-  margin: 0;                          /* 确保无外边距 */
-  padding: 0;                         /* 确保无内边距 */
-}
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 15px;
-  position: relative;  /* 新增：启用层级定位 */
-  z-index: 2;          /* 新增：确保高于canvas的z-index(-1) */
-  background: transparent !important; /* 强制透明背景 */
-  box-shadow: none;    /* 移除阴影 */
-}
-
-  h1 {
-    text-align: center;
-    color: #fafafa;
-    margin: 15px 0;
-    font-size: 22px;
-  }
-
-  .author {
-    color: #ff0000 !important;
-    font-size: 14px;
-    text-align: center;
-    margin: 10px 0;
-    padding: 10px;
-    background: #fff3f3;
-    border-radius: 4px;
-  }
-
-  /* 移动端优化 */
-  @media (max-width: 480px) {
-    .container {
-      padding: 10px;
-    }
-    h1 {
-      font-size: 20px;
-      margin: 10px 0;
-    }
-    .input-group {
-      margin: 15px 0;
-    }
-    select, input {
-      padding: 10px 12px;
-      font-size: 13px;
-    }
-    button {
-      padding: 12px 15px;
-    }
-  }
-
-  .input-group {
-    display: grid;
-    gap: 8px;
-    margin: 20px 0;
-  }
-
-  select, input {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    width: 100%;
-  }
-
-  button {
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  button:hover {
-    background: #2980b9;
-  }
-
-  .video-container {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%;
-    background: #000;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 15px 0;
-  }
-
-  #player {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .parse-status {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 16px;
-    background: rgba(0,0,0,0.7);
-    padding: 12px 24px;
-    border-radius: 24px;
-    z-index: 10;
-  }
-
-  .instructions {
-    margin: 15px 0;
-    color: #666;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 6px;
-    line-height: 1.6;
-    font-size: 14px;
-  }
-
-  .nav-links {
-    text-align: center;
-    margin: 20px 0;
-  }
-  .nav-links a {
-    display: inline-block;
-    color: #666;
-    text-decoration: none;
-    margin: 8px;
-    padding: 8px 20px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    transition: all 0.3s;
-    font-size: 14px;
-  }
-  .nav-links a:hover {
-    background: #f0f0f0;
-    color: #3498db;
-  }
-
- /* ===== 页脚样式 ===== */
-  
-.footer {
-    text-align: center;
-    padding: 20px 0;
-    color: #fff !important;      /* 黑色文字 */
-    font-size: 13px;
-    position: relative;
-    z-index: 9999;              /* 最高层级 */
-    margin: 0;
-  }
-
-</style>
-<script>
-  function parseVideo() {
-    const videoUrl = document.getElementById('url').value;
-    const api = document.getElementById('jk').value;
-    const statusText = document.getElementById('statusText');
-
-    if(videoUrl && api) {
-      statusText.textContent = "正在解析中...";
-      document.getElementById('player').src = api + encodeURIComponent(videoUrl);
-    } else {
-      statusText.textContent = "请输入有效视频地址";
-      setTimeout(() => {
-        statusText.textContent = "等待解析...";
-      }, 2000);
-    }
-  }
-
-// 网状动态背景
-const canvas = document.getElementById('netBackground');
-const ctx = canvas.getContext('2d');
-
-// 设置画布尺寸
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-// 节点类
-class Node {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.vx = Math.random() * 2 - 1;
-    this.vy = Math.random() * 2 - 1;
-    this.radius = 2;
-  }
-
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-
-    // 边界反弹
-    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = '#9AD7F4';
-    ctx.fill();
-  }
-}
-
-// 创建节点（已优化移动端）
-let nodeCount = 300; // 默认PC端数量
-if (window.matchMedia("(max-width: 768px)").matches) {
-  nodeCount = 45; // 移动端减少到100个节点
-}
-
-const nodes = [];
-for (let i = 0; i < nodeCount; i++) {
-  nodes.push(new Node(
-    Math.random() * canvas.width,
-    Math.random() * canvas.height
-  ));
-}
-
-// 绘制连线
-function drawLines() {
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[i].x - nodes[j].x;
-      const dy = nodes[i].y - nodes[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 150) {
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.strokeStyle = `rgba(154, 215, 244, ${1 - dist / 150})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-// 动画循环
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  nodes.forEach(node => {
-    node.update();
-    node.draw();
-  });
-
-  drawLines();
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-  document.getElementById('player').onload = function() {
-    document.getElementById('statusText').style.display = 'none';
-    const iframe = document.getElementById('player');
-    iframe.contentWindow.postMessage({
-      event: 'command',
-      func: 'setSize',
-      args: [iframe.offsetWidth, iframe.offsetHeight]
-    }, '*');
-  };
-
-  window.addEventListener('resize', () => {
-    const iframe = document.getElementById('player');
-    if(iframe.contentWindow) {
-      iframe.contentWindow.postMessage({
-        event: 'command',
-        func: 'setSize',
-        args: [iframe.offsetWidth, iframe.offsetHeight]
-      }, '*');
-    }
-  });
-</script>
-</body>
-</html>
-<style>
-.parse-status {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 16px;
-  background: rgba(0,0,0,0.7);
-  padding: 12px 24px;
-  border-radius: 24px;
-  z-index: 10;
-  max-width: 80%;  /* 新增最大宽度限制 */
-  text-align: center;  /* 确保文字居中 */
-  white-space: normal;  /* 允许自动换行 */
-  word-break: break-all;  /* 长单词换行处理 */
-  line-height: 1.4;  /* 调整行高 */
-
-  /* 移动端适配 */
-  @media (max-width: 480px) {
-    font-size: 14px;
-    padding: 10px 15px;
-    border-radius: 16px;
-    max-width: 90%;
-    white-space: pre-line;  /* 保留换行符 */
-  }
-}
-</style>
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <!-- 其他head内容保持不变 -->
-  <style>
-    /* 新增右侧图片样式 */
-    .right-banner {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 120px;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-/* 背景特效容器 */
-canvas#netBackground {
-  position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: -1;
-    background: radial-gradient(circle,  #0a0a1a, #293047);
-
-/* 确保内容在背景之上 */
-.container {
-  position: relative;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
-  border-radius: 12px;
-  box-shadow: none !important; /* 强制禁用阴影 */
-  padding: 20px;
-  margin: 20px auto;
-}
-
-    .right-banner img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-
-    .right-banner img:hover {
-      transform: translateX(-10px);
-    }
-
-    /* 移动端隐藏 */
-    @media (max-width: 768px) {
-      .right-banner {
-        display: none;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- 在container闭合标签前添加 -->
-  <div class="right-banner">
+<div class="right-banner">
     <img src="lindaiyu.jpg" alt="林黛玉" id="rightAd1">
-  </div>
+</div>
 
-  <!-- 原有container内容保持不变 -->
-  <div class="container">
-    <!-- 页面原有内容 -->
-  </div>
-</body>
-</html>
+<div class="footer">
+    <p>由「大学一点通」团队提供技术支持</p>
+</div>
+
+<script src="./script/script.js"></script>
+</body> </html>
