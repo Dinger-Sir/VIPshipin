@@ -1,0 +1,248 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: "Microsoft Yahei", sans-serif;
+  }
+
+body {
+  background: transparent !important;  /* 新增：强制透明背景 */
+  color: #333;
+  min-height: 100vh;
+  margin: 0;                          /* 确保无外边距 */
+  padding: 0;                         /* 确保无内边距 */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 15px;
+  position: relative;  /* 新增：启用层级定位 */
+  z-index: 2;          /* 新增：确保高于canvas的z-index(-1) */
+  background: transparent !important; /* 强制透明背景 */
+  box-shadow: none;    /* 移除阴影 */
+}
+
+  h1 {
+    text-align: center;
+    color: #fafafa;
+    margin: 15px 0;
+    font-size: 22px;
+  }
+
+  .author {
+    color: #ff0000 !important;
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+    background: #fff3f3;
+    border-radius: 4px;
+  }
+
+  /* 移动端优化 */
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    .input-group {
+      margin: 15px 0;
+    }
+    select, input {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    button {
+      padding: 12px 15px;
+    }
+  }
+
+  .input-group {
+    display: grid;
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  select, input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #2980b9;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 15px 0;
+  }
+
+  #player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .parse-status {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 16px;
+    background: rgba(0,0,0,0.7);
+    padding: 12px 24px;
+    border-radius: 24px;
+    z-index: 10;
+  }
+
+  .instructions {
+    margin: 15px 0;
+    color: #666;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .nav-links {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .nav-links a {
+    display: inline-block;
+    color: #666;
+    text-decoration: none;
+    margin: 8px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+    font-size: 14px;
+  }
+  .nav-links a:hover {
+    background: #f0f0f0;
+    color: #3498db;
+  }
+
+ /* ===== 页脚样式 ===== */
+  
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #fff !important;      /* 黑色文字 */
+    font-size: 13px;
+    position: relative;
+    z-index: 9999;              /* 最高层级 */
+    margin: 0;
+  }
+
+  .parse-status {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 16px;
+    background: rgba(0,0,0,0.7);
+    padding: 12px 24px;
+    border-radius: 24px;
+    z-index: 10;
+    max-width: 80%;  /* 新增最大宽度限制 */
+    text-align: center;  /* 确保文字居中 */
+    white-space: normal;  /* 允许自动换行 */
+    word-break: break-all;  /* 长单词换行处理 */
+    line-height: 1.4;  /* 调整行高 */
+  
+    /* 移动端适配 */
+    @media (max-width: 480px) {
+      font-size: 14px;
+      padding: 10px 15px;
+      border-radius: 16px;
+      max-width: 90%;
+      white-space: pre-line;  /* 保留换行符 */
+    }
+  }
+
+   /* 新增右侧图片样式 */
+   .right-banner {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+/* 背景特效容器 */
+canvas#netBackground {
+position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: -1;
+  background: radial-gradient(circle,  #0a0a1a, #293047);
+
+/* 确保内容在背景之上 */
+.container {
+position: relative;
+z-index: 1;
+background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+border-radius: 12px;
+box-shadow: none !important; /* 强制禁用阴影 */
+padding: 20px;
+margin: 20px auto;
+}
+
+  .right-banner img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .right-banner img:hover {
+    transform: translateX(-10px);
+  }
+
+  /* 移动端隐藏 */
+  @media (max-width: 768px) {
+    .right-banner {
+      display: none;
+    }}
+
+    /* 备注：电脑端和手机端均兼容使用 */
+    #备注{
+        font: weight 900px;;
+    }
