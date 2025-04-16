@@ -61,4 +61,82 @@
 </div>
 
 <script src="./script/script.js"></script>
+
+保护脚本
+<script>
+    // 基础保护（必须）
+    document.addEventListener("DOMContentLoaded", function() {
+      // 禁用右键菜单
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert('You cannot copy content of this page');
+        return false;
+      });
+    
+      // 禁用文本选择（可选）
+      document.onselectstart = function() { 
+        return false; 
+      };
+    
+      // 禁用复制功能（可选）
+      document.oncopy = function() { 
+        return false; 
+      };
+      
+      // 禁用剪切功能（可选）
+      document.oncut = function() { 
+        return false; 
+      };
+    
+      // 禁用粘贴功能（可选）
+      document.onpaste = function() { 
+        return false; 
+      };
+    
+      // 禁用快捷键（Ctrl+C/Ctrl+V）
+      document.addEventListener('keydown', function(e) {
+        // 禁用 Ctrl+C / Ctrl+V / Ctrl+X
+        if (e.ctrlKey && [67, 86, 88].includes(e.keyCode)) {
+          e.preventDefault();
+          return false;
+        }
+        
+        // 禁用 F12 开发者工具
+        if (e.keyCode === 123) { // F12
+          e.preventDefault();
+          return false;
+        }
+        
+        // 禁用 Ctrl+U 查看源代码
+        if (e.ctrlKey && e.keyCode === 85) { 
+          e.preventDefault();
+          return false;
+        }
+        
+        // 禁用 Ctrl+Shift+I 开发者工具
+        if (e.ctrlKey && e.shiftKey && e.keyCode === 73) { 
+          e.preventDefault();
+          return false;
+        }
+      });
+    
+      // 禁用拖拽（可选）
+      document.ondragstart = function() { 
+        return false; 
+      };
+    });
+    
+    // 高级保护（可选）
+    window.onload = function() {
+      // 禁用 iframe 嵌套
+      if (window != top) {
+        top.location.replace(window.location.href);
+      }
+      
+      // 禁用控制台调试
+      setInterval(function(){
+        debugger;
+      }, 1000);
+    }
+    </script>
 </body> </html>
