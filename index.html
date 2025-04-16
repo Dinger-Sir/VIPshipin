@@ -87,16 +87,12 @@
       document.oncut = function() { 
         return false; 
       };
+        
     
-      // 禁用粘贴功能（可选）
-      document.onpaste = function() { 
-        return false; 
-      };
-    
-      // 禁用快捷键（Ctrl+C/Ctrl+V）
+      // 禁用快捷键（Ctrl+C）
       document.addEventListener('keydown', function(e) {
-        // 禁用 Ctrl+C / Ctrl+V / Ctrl+X
-        if (e.ctrlKey && [67, 86, 88].includes(e.keyCode)) {
+        // 禁用 Ctrl+C / Ctrl+X
+        if (e.ctrlKey && [67, 88].includes(e.keyCode)) {
           e.preventDefault();
           return false;
         }
