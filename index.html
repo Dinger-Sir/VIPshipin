@@ -86,12 +86,12 @@
       document.oncut = function() { 
         return false; 
       };
-        
     
-      // 禁用快捷键（Ctrl+C）
+    
+      // 禁用快捷键（Ctrl+C/Ctrl+V）
       document.addEventListener('keydown', function(e) {
-        // 禁用 Ctrl+C / Ctrl+X
-        if (e.ctrlKey && [67, 88].includes(e.keyCode)) {
+        // 禁用 Ctrl+C / Ctrl+V / Ctrl+X
+        if (e.ctrlKey && [67, 86, 88].includes(e.keyCode)) {
           e.preventDefault();
           return false;
         }
@@ -134,4 +134,5 @@
       }, 1000);
     }
     </script>
+
 </body> </html>
