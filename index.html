@@ -71,7 +71,7 @@
       // 禁用右键菜单
       document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
-        alert('This content is protected!');
+        alert('该页面禁止复制!');
         return false;
       });
     
@@ -95,10 +95,10 @@
         return false; 
       };
     
-      // 禁用快捷键（Ctrl+C/Ctrl+V）
+      // 禁用快捷键（Ctrl+C）
       document.addEventListener('keydown', function(e) {
-        // 禁用 Ctrl+C / Ctrl+V / Ctrl+X
-        if (e.ctrlKey && [67, 86, 88].includes(e.keyCode)) {
+        // 禁用 Ctrl+C /  Ctrl+X
+        if (e.ctrlKey && [67, 88].includes(e.keyCode)) {
           e.preventDefault();
           return false;
         }
