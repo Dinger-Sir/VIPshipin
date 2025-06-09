@@ -3,12 +3,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
         <title>大学一点通-VIP视频在线观看</title> 
         <link rel="stylesheet" href="./style/styles.css"> 
-    </head> 
+    
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ef839ded86e69f647e58baa393bfc547";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>           
+    
+      </head> 
     <body> 
         <canvas id="netBackground"></canvas>
 <div class="container">
     <h1>VIP视频在线观看</h1>
-   <div class="author">
+    <div class="author">
       <marquee behavior="scroll" direction="left" scrollamount="8">！！视频由第三方提供，视频中的棋牌、赌博、色情等诱惑性广告是开设在境外的非法诈骗网站，切勿相信！！</marquee>
   </div>
 
@@ -55,7 +66,7 @@
 </div>
 
 <div class="right-banner">
-    <img src="欢迎关注“大学一点通”公众号！.jpg" alt="欢迎关注“大学一点通”公众号！" id="rightAd1">
+    <img src="lindaiyu.jpg" alt="林黛玉" id="rightAd1">
 </div>
 
 <div class="footer">
@@ -64,16 +75,13 @@
 
 <script src="./script/script.js"></script>
 
-        
-
-
 <script>
     // 基础保护（必须）
     document.addEventListener("DOMContentLoaded", function() {
       // 禁用右键菜单
       document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
-        alert('该页面禁止复制!');
+        alert('This content is protected!');
         return false;
       });
     
@@ -94,7 +102,7 @@
     
       // 禁用快捷键（Ctrl+C）
       document.addEventListener('keydown', function(e) {
-        // 禁用 Ctrl+C /  Ctrl+X
+        // 禁用 Ctrl+C / Ctrl+X
         if (e.ctrlKey && [67, 88].includes(e.keyCode)) {
           e.preventDefault();
           return false;
